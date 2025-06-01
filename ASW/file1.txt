@@ -1,0 +1,38 @@
+/*
+ * Sample code: Starting application software for automotive telematics ECU
+ * Language: C
+ */
+
+#include <stdio.h>
+#include <stdbool.h>
+
+// Simulated hardware initialization
+void ECU_HardwareInit(void) {
+    printf("Initializing ECU hardware...\n");
+    // Add hardware initialization code here
+}
+
+// Simulated communication stack initialization (e.g., CAN, Ethernet)
+void ECU_CommStackInit(void) {
+    printf("Initializing communication stack...\n");
+    // Add communication stack initialization code here
+}
+
+// Application main loop
+void ECU_MainLoop(void) {
+    printf("Entering main application loop...\n");
+    while (true) {
+        // Poll sensors, process data, handle communication, etc.
+        printf("Running main tasks...\n");
+        // Simulate periodic task delay
+        // In real ECU, use RTOS delay or timer
+        for (volatile int i = 0; i < 1000000; ++i);
+    }
+}
+
+int main(void) {
+    ECU_HardwareInit();
+    ECU_CommStackInit();
+    ECU_MainLoop();
+    return 0;
+}

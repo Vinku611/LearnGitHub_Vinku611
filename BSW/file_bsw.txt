@@ -1,0 +1,63 @@
+/*
+ * Sample BSW (Basic Software) code for Telematics Automotive ECU
+ * This is a simplified example for educational purposes.
+ */
+
+#include <stdio.h>
+#include <stdint.h>
+#include <stdbool.h>
+
+// Mock CAN driver BSW module
+typedef struct {
+    uint32_t id;
+    uint8_t data[8];
+    uint8_t dlc;
+} CanMessage;
+
+void Can_Init(void) {
+    // Initialize CAN hardware
+    printf("CAN Initialized\n");
+}
+
+bool Can_Send(const CanMessage* msg) {
+    // Send CAN message (mock)
+    printf("CAN Send: ID=0x%X DLC=%d Data=", msg->id, msg->dlc);
+    for (int i = 0; i < msg->dlc; ++i) {
+        printf("%02X ", msg->data[i]);
+    }
+    printf("\n");
+    return true;
+}
+
+// Mock NVM (Non-volatile memory) BSW module
+void Nvm_Init(void) {
+    // Initialize NVM
+    printf("NVM Initialized\n");
+}
+
+bool Nvm_Write(uint16_t blockId, const uint8_t* data, uint16_t length) {
+    // Write data to NVM (mock)
+    printf("NVM Write: BlockID=%d Length=%d\n", blockId, length);
+    return true;
+}
+
+// Main BSW initialization
+void Bsw_Init(void) {
+    Can_Init();
+    Nvm_Init();
+    // Add other BSW module initializations here
+}
+
+int main(void) {
+    Bsw_Init();
+
+    // Example: Send a CAN message
+    CanMessage msg = { .id = 0x123, .data = {0xDE, 0xAD, 0xBE, 0xEF}, .dlc = 4 };
+    Can_Send(&msg);
+
+    // Example: Write to NVM
+    uint8_t nvmData[4] = {0x01, 0x02, 0x03, 0x04};
+    Nvm_Write(1, nvmData, 4);
+
+    return 0;
+}
